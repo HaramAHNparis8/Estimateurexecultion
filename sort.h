@@ -3,7 +3,7 @@
 
 #include <stdio.h> 
 #include <stdlib.h>
-
+#include <time.h>
 void merge(int* tab, int bas, int milieu, int haut);
 void mergeSortEncroissant(int* a, int low, int hight);
 void MergeEnDecroissant(int* tab, int bas, int milieu, int haut);

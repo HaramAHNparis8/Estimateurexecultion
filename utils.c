@@ -1,3 +1,67 @@
+#include "utils.h"
+#include "sort.h"
+//la fonction pour retourner la taille de tableau
+
+int returntaille(){ //la fonction pour entrer la taille
+	
+	int taille;
+
+	printf("\nentrez la taille de tableau\n");
+	printf("\n\n->  ");
+	scanf("%d", &taille);
+
+	
+	return taille;
+}
+
+// la fonction pour remplir les elements de tableaux
+//generer le tableau, remplir les elements au tableau et retourner le tableau par la pointeur
+
+//la premier proposition
+
+int* generationdetab(int taille){ 
+
+
+	int i;
+	int* tab = (int*)malloc(taille * sizeof(int));	
+	//int* tab = malloc(taille * sizeof(int)); 
+	
+	for(i = 0; i < taille; i++){
+
+		tab[i] = rand() % 10000;
+
+	}
+
+	return tab;
+}
+
+//la deuxiement proposition
+
+void RemplirLesTab(int* tab, int taille){
+
+	int i;
+
+	for(i = 0; i < taille; i++){ 
+		
+		tab[i] = rand() % 1000;
+
+
+	}
+
+
+}
+// troisieme proposition
+void remplirRecTab(int taille, int* tab){
+
+	if(taille == 0){
+		return;
+	}
+	tab[taille - 1] = rand() % 1000;
+	
+	remplirRecTab(taille - 1,tab);
+}
+
+
 //les fonctions pour initialiser les tableaux copier les tableau original
 
 int* CopierLeTab(int* tab, int taille){
@@ -289,7 +353,7 @@ int estOrdreDesCroissant(int* tab, int taille){
 void comparaison(int* tab,int taille){
 	
 	int* copier = (int *)malloc(taille * sizeof(int));
-	int i;
+
 	double tabsum[taillesum],sum, Resfusioncroissant, Resfusiondescroissant,ResTriRapideEnCroissant,ResTriRapiDesCroissant,ResQuickortProbabilisteEncroissant,ResQuickortProbabilisteEnDesCroissant,ResBubleSortEnCroissant,ResBubleSortDesCroissant,tabcroissant[taillecroissant],tabdesecroissant[tailledescroissant];
 
 	melangertout(tab,taille);

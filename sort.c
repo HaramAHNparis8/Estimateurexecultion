@@ -1,3 +1,5 @@
+#include "sort.h"
+#include "utils.h"
 //la fonction pour trier les elements de tableau
 
 //la fusion
