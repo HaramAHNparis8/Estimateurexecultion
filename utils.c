@@ -361,6 +361,11 @@ int CompareEnOrdreDesCroissant(const void *a, const void *b) {
     return (*(int *)b - *(int *)a);
 }
 
+// la fonction pour vertifier qu'il est bien trie ou pas
+
+
+
+
 void comparaison(int* tab,int taille){
 	
 	int* copier = (int *)malloc(taille * sizeof(int));

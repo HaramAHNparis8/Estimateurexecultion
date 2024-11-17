@@ -1,6 +1,26 @@
 #include "sort.h"
 #include "utils.h"
 #include "exercices5.h"
+// la fonction pour vertifier qu'il est bien trie ou pas
+
+int estbientrie(int* tab1, int* tab2, int taille){
+	int i = 0;
+
+	while(i < taille){
+
+		if(tab1[i] != tab2[i]){
+
+			return 0;
+		}
+		
+		i++;
+
+	}
+	
+	return 1;
+
+}
+
 
 
 void TestLaFonction(){
@@ -12,10 +32,10 @@ void TestLaFonction(){
 	int* tab1 = generationdetab(taille);
 	//affichagederes(tab1,taille);
 	//RemplirLesTab(tab2,taille);
-	//affichagederes(tab2,taille);
-	
-	//int* tab2 = (int*)malloc(taille * sizeof(int));
-	//CopierTab(tab1,tab2,taille);
+	//affichagederes(tab2,taille);	
+	int* tab2 = (int*)malloc(taille * sizeof(int));
+	printf("\ncoucouc1\n");
+	CopierTab(tab1,tab2,taille);
 	//printf("\n\n--------------tab1-------------\n\n");
 	//affichagederes(tab1,taille);
 	//printf("\n\n--------------tab2-------------\n\n");
@@ -50,7 +70,7 @@ void TestLaFonction(){
 	//printf("\n------quickort probabiliste---\n");
 	//printf("\navant de trie\n");
 	//affichagederes(tab3, taille);
-	//shuffle(tab3,taille);// testez la fonction de shuffle
+		
 	//quick_sort(tab3, 0,taille - 1);
 	//printf("\napres avoir trie\n");
 	//affichagederes(tab3,taille);
@@ -71,10 +91,15 @@ void TestLaFonction(){
 	//affichagederes(tab1,taille);
 	//printf("\nres de ordre Descroissant : %d\n\n", estOrdreDesCroissant(tab1,taille));
 	//affichagederes(tab1,taille);
-	qsort(tab1,taille,sizeof(int),CompareEnOrdreCroissant);
-	affichagederes(tab1,taille);
-	qsort(tab1,taille,sizeof(int),CompareEnOrdreDesCroissant);
-	affichagederes(tab1,taille);
+	//qsort(tab1,taille,sizeof(int),CompareEnOrdreCroissant);
+	//affichagederes(tab1,taille);
+	//qsort(tab1,taille,sizeof(int),CompareEnOrdreDesCroissant);
+	melangertout(tab2,taille);
+	//printf("\ncoucouc2\n");
+	//printf("res de trier bien ou pas %d\n", estbientrie(tab1,tab2,taille));
+	//printf("\ncoucouc3\n");
+
+	//affichagederes(tab1,taille);
 
 	
 }
