@@ -33,5 +33,6 @@ int EstdansTaille(double* tab, int taille, double min);
 int estOrdreCroissant(int* tab, int taille);
 int estOrdreDesCroissant(int* tab, int taille);
 void comparaison(int* tab,int taille);
-
+int CompareEnOrdreCroissant(const void *a, const void *b);
+int CompareEnOrdreDesCroissant(const void *a, const void *b);
 #endif 

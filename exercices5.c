@@ -2,15 +2,6 @@
 #include "utils.h"
 #include "exercices5.h"
 
-// la fonction pour verifier que le tableau est bien trie ou non
-
-int CompareEnOrdreCroissant(const void *a, const void *b) {
-    return (*(int *)a - *(int *)b);
-}
-
-int CompareEnOrdreDesCroissant(const void *a, const void *b) {
-    return (*(int *)b - *(int *)a);
-}
 
 void TestLaFonction(){
 
@@ -69,7 +60,7 @@ void TestLaFonction(){
 	//buble_sort_croissant(tab1,taille);
 	//printf("\napres avoir trie\n");
 	//affichagederes(tab2,taille);	
-	comparaison(tab1,taille);
+	//comparaison(tab1,taille);
 	//CopierTab(tab2,tab1,taille);
 	//QuickortProbabilisteSortEnordreCroissant(tab1,taille);
 	//affichagederes(tab1,taille);
@@ -79,9 +70,13 @@ void TestLaFonction(){
 	//buble_sort_descroissant(tab1, taille);
 	//affichagederes(tab1,taille);
 	//printf("\nres de ordre Descroissant : %d\n\n", estOrdreDesCroissant(tab1,taille));
-
 	//affichagederes(tab1,taille);
+	qsort(tab1,taille,sizeof(int),CompareEnOrdreCroissant);
+	affichagederes(tab1,taille);
+	qsort(tab1,taille,sizeof(int),CompareEnOrdreDesCroissant);
+	affichagederes(tab1,taille);
 
+	
 }
 
 

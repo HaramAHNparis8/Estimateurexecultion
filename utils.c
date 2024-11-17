@@ -350,6 +350,17 @@ int estOrdreDesCroissant(int* tab, int taille){
 	return printf("");
 
 }
+
+// la fonction pour verifier que le tableau est bien trie ou non
+
+int CompareEnOrdreCroissant(const void *a, const void *b) {
+    return (*(int *)a - *(int *)b);
+}
+
+int CompareEnOrdreDesCroissant(const void *a, const void *b) {
+    return (*(int *)b - *(int *)a);
+}
+
 void comparaison(int* tab,int taille){
 	
 	int* copier = (int *)malloc(taille * sizeof(int));
