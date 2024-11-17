@@ -1,5 +1,7 @@
 #include "utils.h"
 #include "sort.h"
+
+
 //la fonction pour retourner la taille de tableau
 
 int returntaille(){ //la fonction pour entrer la taille
@@ -287,6 +289,7 @@ double  EstimationDesCroissantBubleSort(int* tab, int taille){
 	return tempspris;
 
 }
+
 double min(double* tab,int taille){
 	int i;
 	double min = tab[0];
@@ -317,39 +320,88 @@ int Estdans(double* tab, int taille, double min){
 	}
 }
 
-int EstdansTaille(double* tab, int taille, double min){
+int EstdansTerminal(double* tab, int taille, double min){
 		
 		return Estdans(tab,taille - 1, min);
 }
 
+//la fonction pour tester que les tableaux sont bien trie ou pas
+
+void estbientrie(int* tab1, int* tab2, int taille){
+	int i = 0;
+
+	printf("\n--------------------------------------------------\n");
+	printf("\nLe resultat de la comparaison entre les elements du tableau trie et chaque element un par un\n");
+	while(i < taille){
+
+		if(tab1[i] == tab2[i]){
+
+			printf("\n -> correct \n");
+		}
+		else{
+			printf("\n -> non correct \n");
+			
+
+		}
+		
+		i++;	
+	
+	}
+	
+		
+}
+
 //la fonction pour verifier le tab est bien trie en ordre croissant
 
-int estOrdreCroissant(int* tab, int taille){
-	int i;
+void estOrdreCroissant(int* tab, int taille){
+	int i = 0;
 
-	for(i = 0; i < taille - 1; i++){
+	printf("\n--------------------------------------------------\n");
+	printf("\nLe resultat de tableau est en ordre croissant\n");
+	while(i < taille - 1){
 
 		if(tab[i] < tab[i + 1]){
-			return (tab[i] > tab[i + 1]) ? 0 : 1; // c'est appris PIA
+			printf("\nle resultat %deme et %d eme[%d et %d]\n",i, i + 1, tab[i], tab[i + 1]);
+			printf("\n -> correct\n");
+
+
 		}
+		else{
+			printf("\nle resultat %deme et %d eme[%d et %d]\n",i, i + 1, tab[i], tab[i + 1]);
+			printf("\n -> non correct\n");
+		}
+		i++;
+
 
 	}
-	return printf("");
 }
 
-int estOrdreDesCroissant(int* tab, int taille){
-	int i;
+void estOrdreDesCroissant(int* tab, int taille){
+	
+	int i = 0;
+	printf("\nle tableau est en ordre descroissant\n");
 
-	for(i = 0; i < taille - 1; i++){
+	while(i < taille){
 
 		if(tab[i] > tab[i + 1]){
-			return (tab[i] < tab[i + 1]) ? 0 : 1; // c'est appris PIA
+
+			printf("\nle resultat %deme et %d eme[%d et %d]\n",i, i + 1, tab[i], tab[i + 1]);
+			printf("\n -> correct\n");
+
+
 		}
+		else{
+			printf("\nle resultat %deme et %d eme[%d et %d]\n",i, i + 1, tab[i], tab[i + 1]);
+			printf("\n -> non correct\n");
+
+		}
+		i++;
+
 
 	}
-	return printf("");
 
 }
+
 
 // la fonction pour verifier que le tableau est bien trie ou non
 
@@ -363,19 +415,22 @@ int CompareEnOrdreDesCroissant(const void *a, const void *b) {
 
 // la fonction pour vertifier qu'il est bien trie ou pas
 
-
-
-
 void comparaison(int* tab,int taille){
 	
 	int* copier = (int *)malloc(taille * sizeof(int));
-
+	int* testtabenOrdreCroissant = (int *) malloc(taille * sizeof(int));// le tableau pour tester bien trier ou pas
+	int* testtabenOrdreDesCroissant = (int *) malloc(taille * sizeof(int));// le tableau pour tester bien trier ou pas
 	double tabsum[taillesum],sum, Resfusioncroissant, Resfusiondescroissant,ResTriRapideEnCroissant,ResTriRapiDesCroissant,ResQuickortProbabilisteEncroissant,ResQuickortProbabilisteEnDesCroissant,ResBubleSortEnCroissant,ResBubleSortDesCroissant,tabcroissant[taillecroissant],tabdesecroissant[tailledescroissant];
-
+	CopierTab(tab,testtabenOrdreCroissant,taille);
+	CopierTab(tab,testtabenOrdreDesCroissant,taille);
+	qsort(testtabenOrdreCroissant,taille,sizeof(int),CompareEnOrdreCroissant);
+	qsort(testtabenOrdreDesCroissant,taille,sizeof(int),CompareEnOrdreDesCroissant);	
 	melangertout(tab,taille);
 	CopierTab(tab,copier,taille);// j'use cette proposition parce que cette fonction n'a pas besoin de la memoire
 	Resfusioncroissant = EstimationMergeSortEncroissant(copier,taille);
+	estbientrie(copier,testtabenOrdreCroissant,taille);
 //la fonction pour intialiser la lst 
+	estOrdreCroissant(copier,taille);	
 	//la fonction pour initialiser les tableaux c'est la premiere propostion
 	CopierTab(tab,copier,taille);
 //la fonction pour initialiser les tableaux c'est la deuxieme propostion
@@ -386,6 +441,7 @@ void comparaison(int* tab,int taille){
 	tabdesecroissant[0] = Resfusiondescroissant;
 	sum = (Resfusioncroissant + Resfusiondescroissant) / 2;
 	tabsum[0] = sum;//le tableau pour stocker les informations de moyen
+	
 	printf("\nresultat de temps pris en moyen \n\n-> %f \n", sum);
 	sum = 0;
 	CopierTab(tab,copier,taille);
@@ -427,7 +483,7 @@ void comparaison(int* tab,int taille){
 	sum = 0;	
 	tabcroissant[3] = ResBubleSortEnCroissant;
 	tabdesecroissant[3] = ResBubleSortDesCroissant;
-
+	
 	printf("\n--------------------------------------------------\n\n\n");
 
 		

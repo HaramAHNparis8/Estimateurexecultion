@@ -14,8 +14,6 @@ void remplirRecTab(int taille, int* tab);
 int* CopierLeTab(int* tab, int taille);
 void CopierTab(int* oringinal,int* copier ,int taille);
 void comparaison(int* tab,int taille);
-int estOrdreCroissant(int* tab, int taille);
-int estOrdreDesCroissant(int* tab, int taille);
 double EstimationMergeSortEncroissant(int* tab,int taille);
 double EstimationMergeSortDescroissant(int* tab,int taille);
 double EstimationBublesortEncroissant(int* tab,int taille);
@@ -29,10 +27,12 @@ double EstimationEnCroissantBubleSort(int* tab, int taille);
 double EstimationDesCroissantBubleSort(int* tab, int taille);
 double min(double* tab,int taille);
 int Estdans(double* tab, int taille, double min);
-int EstdansTaille(double* tab, int taille, double min);
-int estOrdreCroissant(int* tab, int taille);
-int estOrdreDesCroissant(int* tab, int taille);
+int EstdansTerminal(double* tab, int taille, double min);
+void estOrdreCroissant(int* tab, int taille);
+void estOrdreDesCroissant(int* tab, int taille);
 void comparaison(int* tab,int taille);
 int CompareEnOrdreCroissant(const void *a, const void *b);
 int CompareEnOrdreDesCroissant(const void *a, const void *b);
+void estbientrie(int* tab1, int* tab2, int taille);
+
 #endif 

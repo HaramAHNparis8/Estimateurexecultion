@@ -1,27 +1,6 @@
 #include "sort.h"
 #include "utils.h"
 #include "exercices5.h"
-// la fonction pour vertifier qu'il est bien trie ou pas
-
-int estbientrie(int* tab1, int* tab2, int taille){
-	int i = 0;
-
-	while(i < taille){
-
-		if(tab1[i] != tab2[i]){
-
-			return 0;
-		}
-		
-		i++;
-
-	}
-	
-	return 1;
-
-}
-
-
 
 void TestLaFonction(){
 
@@ -33,9 +12,9 @@ void TestLaFonction(){
 	//affichagederes(tab1,taille);
 	//RemplirLesTab(tab2,taille);
 	//affichagederes(tab2,taille);	
-	int* tab2 = (int*)malloc(taille * sizeof(int));
-	printf("\ncoucouc1\n");
-	CopierTab(tab1,tab2,taille);
+	//int* tab2 = (int*)malloc(taille * sizeof(int));
+	//printf("\ncoucouc1\n");
+	//CopierTab(tab1,tab2,taille);
 	//printf("\n\n--------------tab1-------------\n\n");
 	//affichagederes(tab1,taille);
 	//printf("\n\n--------------tab2-------------\n\n");
@@ -50,7 +29,7 @@ void TestLaFonction(){
 	//printf("\n\n--------------apres avoir copie------------\n\n");
 	//affichagederes(tab2,taille);
 	//printf("\n\n--------------apres avoir copie tab1-------------\n\n");
-	affichagederes(tab1,taille);
+	//affichagederes(tab1,taille);
 	//printf("\n\n--------------apres avoir copie tab2-------------\n\n");
 	//affichagederes(tab2, taille);
 // testez les fonctions pour trier les elements de tableau 
@@ -80,7 +59,7 @@ void TestLaFonction(){
 	//buble_sort_croissant(tab1,taille);
 	//printf("\napres avoir trie\n");
 	//affichagederes(tab2,taille);	
-	//comparaison(tab1,taille);
+	comparaison(tab1,taille);
 	//CopierTab(tab2,tab1,taille);
 	//QuickortProbabilisteSortEnordreCroissant(tab1,taille);
 	//affichagederes(tab1,taille);
@@ -94,7 +73,7 @@ void TestLaFonction(){
 	//qsort(tab1,taille,sizeof(int),CompareEnOrdreCroissant);
 	//affichagederes(tab1,taille);
 	//qsort(tab1,taille,sizeof(int),CompareEnOrdreDesCroissant);
-	melangertout(tab2,taille);
+	//melangertout(tab2,taille);
 	//printf("\ncoucouc2\n");
 	//printf("res de trier bien ou pas %d\n", estbientrie(tab1,tab2,taille));
 	//printf("\ncoucouc3\n");
