@@ -361,13 +361,13 @@ void estOrdreCroissant(int* tab, int taille){
 	while(i < taille - 1){
 
 		if(tab[i] < tab[i + 1]){
-			printf("\nle resultat %deme et %d eme[%d et %d]\n",i, i + 1, tab[i], tab[i + 1]);
+			printf("\nle resultat %deme et %d eme[%d  %d]\n",i, i + 1, tab[i], tab[i + 1]);
 			printf("\n -> correct\n");
 
 
 		}
 		else{
-			printf("\nle resultat %deme et %d eme[%d et %d]\n",i, i + 1, tab[i], tab[i + 1]);
+			printf("\nle resultat %deme et %d eme[%d %d]\n",i, i + 1, tab[i], tab[i + 1]);
 			printf("\n -> non correct\n");
 		}
 		i++;
@@ -377,15 +377,17 @@ void estOrdreCroissant(int* tab, int taille){
 }
 
 void estOrdreDesCroissant(int* tab, int taille){
+
+	printf("\n--------------------------------------------------\n");
 	
 	int i = 0;
 	printf("\nle tableau est en ordre descroissant\n");
 
-	while(i < taille){
+	while(i < taille - 1){
 
 		if(tab[i] > tab[i + 1]){
 
-			printf("\nle resultat %deme et %d eme[%d et %d]\n",i, i + 1, tab[i], tab[i + 1]);
+			printf("\nle resultat %deme et %d eme[%d  %d]\n",i, i + 1, tab[i], tab[i + 1]);
 			printf("\n -> correct\n");
 
 
@@ -421,10 +423,12 @@ void comparaison(int* tab,int taille){
 	int* testtabenOrdreCroissant = (int *) malloc(taille * sizeof(int));// le tableau pour tester bien trier ou pas
 	int* testtabenOrdreDesCroissant = (int *) malloc(taille * sizeof(int));// le tableau pour tester bien trier ou pas
 	double tabsum[taillesum],sum, Resfusioncroissant, Resfusiondescroissant,ResTriRapideEnCroissant,ResTriRapiDesCroissant,ResQuickortProbabilisteEncroissant,ResQuickortProbabilisteEnDesCroissant,ResBubleSortEnCroissant,ResBubleSortDesCroissant,tabcroissant[taillecroissant],tabdesecroissant[tailledescroissant];
+
 	CopierTab(tab,testtabenOrdreCroissant,taille);
 	CopierTab(tab,testtabenOrdreDesCroissant,taille);
 	qsort(testtabenOrdreCroissant,taille,sizeof(int),CompareEnOrdreCroissant);
 	qsort(testtabenOrdreDesCroissant,taille,sizeof(int),CompareEnOrdreDesCroissant);	
+	
 	melangertout(tab,taille);
 	CopierTab(tab,copier,taille);// j'use cette proposition parce que cette fonction n'a pas besoin de la memoire
 	Resfusioncroissant = EstimationMergeSortEncroissant(copier,taille);
@@ -437,6 +441,8 @@ void comparaison(int* tab,int taille){
 	//copier = CopierLeTab(tab,taille);
 	//affichagederes(copier,taille);
 	Resfusiondescroissant = EstimationMergeSortDescroissant(copier,taille);
+	estbientrie(copier,testtabenOrdreDesCroissant,taille);
+	estOrdreDesCroissant(copier,taille);
 	tabcroissant[0] = Resfusioncroissant;
 	tabdesecroissant[0] = Resfusiondescroissant;
 	sum = (Resfusioncroissant + Resfusiondescroissant) / 2;
@@ -448,34 +454,59 @@ void comparaison(int* tab,int taille){
 	affichagederes(copier,taille);
 	printf("\n\n");
 	ResTriRapideEnCroissant = EstimationTriRapideEncroissant(copier,taille);
+	estbientrie(copier,testtabenOrdreCroissant,taille);
+	estOrdreCroissant(copier,taille);
+	
 	printf("\n\n");
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
 	ResTriRapiDesCroissant = EstimationTriRapideDescroissant(copier,taille);
+	estbientrie(copier,testtabenOrdreDesCroissant,taille);
+	estOrdreDesCroissant(copier,taille);
 	sum = ResTriRapideEnCroissant + ResTriRapiDesCroissant / 2;
 	tabcroissant[1] = ResTriRapideEnCroissant;
 	tabdesecroissant[1] = ResTriRapiDesCroissant;
 	printf("\nresultat de temps pris en moyen \n\n-> %f \n", sum);
+	
 	tabsum[1] = sum;
 	sum = 0;
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
+	
 	ResQuickortProbabilisteEncroissant = EstimationEncroissantQuicksort(copier,taille);
+	estbientrie(copier,testtabenOrdreCroissant,taille);
+	estOrdreCroissant(copier,taille);
+
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
+	
+		
 	ResQuickortProbabilisteEnDesCroissant = EstimationDesCroissantQuicksort(copier,taille); 
-	CopierTab(tab,copier,taille);
-	affichagederes(copier,taille);
+	estbientrie(copier,testtabenOrdreDesCroissant,taille);
+	estOrdreDesCroissant(copier,taille);
+	
 	sum = ResQuickortProbabilisteEncroissant + ResQuickortProbabilisteEnDesCroissant / 2; 
-	tabsum[2] = sum;
 	printf("\nresultat de temps pris en moyen \n\n-> %f \n", sum);
+
+	tabsum[2] = sum;
 	tabcroissant[2] = ResQuickortProbabilisteEncroissant;
 	tabdesecroissant[2] = ResQuickortProbabilisteEnDesCroissant;
 	sum = 0;
-	ResBubleSortEnCroissant = EstimationEnCroissantBubleSort(copier,taille);
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
+
+	ResBubleSortEnCroissant = EstimationEnCroissantBubleSort(copier,taille);
+	estbientrie(copier,testtabenOrdreCroissant, taille);
+	estOrdreCroissant(copier,taille);
+
+	CopierTab(tab,copier,taille);
+	affichagederes(copier,taille);
+	
 	ResBubleSortDesCroissant = EstimationDesCroissantBubleSort(copier,taille);
+
+	estbientrie(copier,testtabenOrdreDesCroissant, taille);
+	estOrdreDesCroissant(copier,taille);
+
 	CopierTab(tab,copier,taille);
 	sum = ResBubleSortEnCroissant +  ResBubleSortDesCroissant/ 2; 
 	tabsum[3] = sum;
