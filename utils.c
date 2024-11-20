@@ -1,6 +1,19 @@
 #include "utils.h"
 #include "sort.h"
 
+const char* TabNomAlgo[]{
+	
+	"la fusion Descroissant";
+	"la fusion Croissant";
+	"Quicksort Croissant";
+	"Quicksort Descroissant";
+	"QuickortProbabiliste Croissant";
+	"QuickortProbabiliste Descroissant";
+	"BubleSort Croissant";
+	"BubleSort Descroissant";
+
+
+}
 
 //la fonction pour retourner la taille de tableau
 
@@ -122,173 +135,22 @@ void affichagederes(int* tab,int taille){
 
 //les fonctions pour estimer des temps pris 
 
-double EstimationMergeSortEncroissant(int* tab,int taille){ 
+double EstimationGeneral(int* tab, int taille, void (*f)(int*, int, int), const char** algoNames, int algoIndex) {
+   
+    printf("\n\n--------------%s-------------\n\n", algoNames[algoIndex]);
+    affichagederes(tab, taille); 
+    clock_t debut = clock(); 
+    f(tab, 0, taille - 1);   
+    clock_t fin = clock(); 
+    double tempspris = (double)(fin - debut) / CLOCKS_PER_SEC;
+    affichagederes(tab, taille); 
+    printf("\nTemps pris pour l'algorithme  %s : %f seconds\n", algoNames[algoIndex], tempspris);
 
-// la fonction pour estimer le temps pris de la fusion en l'ordre croissant
-	
-	printf("\n-------------------La fusion---------------------\n");
-	affichagederes(tab,taille);
-	clock_t debut = clock();
-	mergeSortEncroissant(tab, 0, taille - 1);
-	clock_t fin = clock();
-	double tempspris = (double)(fin - debut) / CLOCKS_PER_SEC;
-	affichagederes(tab,taille);
-	printf("\nla fusion en croissant triee %f seconds\n", tempspris);
-	
-	return tempspris;	
-}
-
-double EstimationMergeSortDescroissant(int* tab,int taille){
-
-// la fonction pour estimer le temps pris de la fusion en l'ordre descroissant
-	printf("\n\n--------------en l'ordre descroissant-------------\n\n");
-
-
-	affichagederes(tab,taille);
-	clock_t debut = clock();
-	mergeSortdescroissant(tab, 0, taille - 1);
-	clock_t fin = clock();
-	double tempspris = (double)(fin - debut) / CLOCKS_PER_SEC;
-	affichagederes(tab,taille);
-	printf("\nla fusion en descroissant triee %f seconds\n", tempspris);
-	
-	return tempspris;
-	
-}
-double EstimationBublesortEncroissant(int* tab,int taille){
-	printf("\n\n--------------en l'ordre croissant-------------\n\n");
-
-
-	affichagederes(tab,taille);
-	clock_t debut = clock();
-	buble_sort_croissant(tab,taille);
-	clock_t fin = clock();
-	double tempspris = (double)(fin - debut) / CLOCKS_PER_SEC;
-	affichagederes(tab,taille);
-	printf("\nla fusion en descroissant triee %f seconds\n", tempspris);
-	
-	return tempspris;
-
-
-}
-double EstimationLafusionSortDescroissant(int* tab, int taille){
-// la fonction pour estimer le temps pris de la fusion en l'ordre descroissant
-	printf("\n\n--------------en l'ordre descroissant-------------\n\n");
-
-
-	affichagederes(tab,taille);
-	clock_t debut = clock();
-	mergeSortdescroissant(tab, 0, taille - 1);
-	clock_t fin = clock();
-	double tempspris = (double)(fin - debut) / CLOCKS_PER_SEC;
-	affichagederes(tab,taille);
-	printf("\nla fusion en descroissant triee %f seconds\n", tempspris);
-	
-	return tempspris;
-	
-}
-double EstimationTriRapideEncroissant(int* tab,int taille){
-	printf("\n\n-----------------Tri Rapide----------------------\n\n");	
-	
-	affichagederes(tab,taille);
-	
-	clock_t debut = clock();
-	TriRapideEnCroissant(tab, 0, taille - 1);
-	clock_t fin = clock();
-	double tempspris = (double)(fin - debut) / CLOCKS_PER_SEC;
-	affichagederes(tab,taille);
-	printf("\nla tri Rapide en croissant triee %f seconds\n", tempspris);
-	
-	return tempspris;
+    return tempspris;
 
 }
 
-double EstimationTriRapideDescroissant(int* tab,int taille){
-	
-	affichagederes(tab,taille);
-	
-	clock_t debut = clock();
-	TriRapideDesCroissant(tab, 0, taille - 1);	
-	clock_t fin = clock();
-	double tempspris = (double)(fin - debut) / CLOCKS_PER_SEC;
-	affichagederes(tab,taille);
-	printf("\nla tri Rapide en descroissant triee %f seconds\n", tempspris);
-	
-	return tempspris;
 
-}
-
-double EstimationEncroissant(int* tab,int taille){
-	
-	affichagederes(tab,taille);
-	clock_t debut = clock();
-	TriRapideDesCroissant(tab, 0, taille - 1);	
-	clock_t fin = clock();
-	double tempspris = (double)(fin - debut) / CLOCKS_PER_SEC;
-	affichagederes(tab,taille);
-	printf("\nla tri Rapide en descroissant triee %f seconds\n", tempspris);
-	
-	return tempspris;
-
-
-}
-
-double EstimationEncroissantQuicksort(int* tab,int taille){
-	
-	affichagederes(tab,taille);
-	clock_t debut = clock();
-	QuickortProbabilisteSortEnordreCroissant(tab,taille);
-	clock_t fin = clock();
-	double tempspris = (double)(fin - debut) / CLOCKS_PER_SEC;
-	affichagederes(tab,taille);
-	printf("\nla QuickSort en croissant triee %f seconds\n", tempspris);
-	
-	return tempspris;
-
-
-}
-
-double EstimationDesCroissantQuicksort(int* tab,int taille){
-	
-	affichagederes(tab,taille);
-	clock_t debut = clock();
-	QuickortProbabilisteSortEnordreDesCroissant(tab,taille);
-	clock_t fin = clock();
-	double tempspris = (double)(fin - debut) / CLOCKS_PER_SEC;
-	affichagederes(tab,taille);
-	printf("\nla QuickSort en descroissant triee %f seconds\n", tempspris);
-	
-	return tempspris;
-
-
-}
-
-double EstimationEnCroissantBubleSort(int* tab, int taille){
-	affichagederes(tab,taille);
-	clock_t debut = clock();
-	buble_sort_croissant(tab, taille);	
-	clock_t fin = clock();
-	double tempspris = (double)(fin - debut) / CLOCKS_PER_SEC;
-	affichagederes(tab,taille);
-	printf("\nla BubleSort en croissant triee %f seconds\n", tempspris);
-	
-	return tempspris;
-
-}
-
-double  EstimationDesCroissantBubleSort(int* tab, int taille){
-
-	affichagederes(tab,taille);
-	clock_t debut = clock();
-	buble_sort_descroissant(tab, taille);	
-	clock_t fin = clock();
-	double tempspris = (double)(fin - debut) / CLOCKS_PER_SEC;
-	affichagederes(tab,taille);
-	printf("\nla BubleSort en Descroissant triee %f seconds\n", tempspris);
-	
-	return tempspris;
-
-}
 
 double min(double* tab,int taille){
 	int i;
@@ -328,6 +190,7 @@ int EstdansTerminal(double* tab, int taille, double min){
 //la fonction pour tester que les tableaux sont bien trie ou pas
 
 void estbientrie(int* tab1, int* tab2, int taille){
+	
 	int i = 0;
 
 	printf("\n--------------------------------------------------\n");
@@ -340,13 +203,14 @@ void estbientrie(int* tab1, int* tab2, int taille){
 		}
 		else{
 			printf("\n -> non correct \n");
-			
-
+			printf("\nle tableau non trie\n");
+			exit(1);
 		}
 		
 		i++;	
 	
 	}
+	printf("\n\nres : bien trie\n\n");
 	
 		
 }
@@ -387,13 +251,13 @@ void estOrdreDesCroissant(int* tab, int taille){
 
 		if(tab[i] > tab[i + 1]){
 
-			printf("\nle resultat %deme et %d eme[%d  %d]\n",i, i + 1, tab[i], tab[i + 1]);
+			printf("\nle resultat %deme %d eme[%d  %d]\n",i, i + 1, tab[i], tab[i + 1]);
 			printf("\n -> correct\n");
 
 
 		}
 		else{
-			printf("\nle resultat %deme et %d eme[%d et %d]\n",i, i + 1, tab[i], tab[i + 1]);
+			printf("\nle resultat %deme %d eme[%d et %d]\n",i, i + 1, tab[i], tab[i + 1]);
 			printf("\n -> non correct\n");
 
 		}
@@ -423,12 +287,10 @@ void comparaison(int* tab,int taille){
 	int* testtabenOrdreCroissant = (int *) malloc(taille * sizeof(int));// le tableau pour tester bien trier ou pas
 	int* testtabenOrdreDesCroissant = (int *) malloc(taille * sizeof(int));// le tableau pour tester bien trier ou pas
 	double tabsum[taillesum],sum, Resfusioncroissant, Resfusiondescroissant,ResTriRapideEnCroissant,ResTriRapiDesCroissant,ResQuickortProbabilisteEncroissant,ResQuickortProbabilisteEnDesCroissant,ResBubleSortEnCroissant,ResBubleSortDesCroissant,tabcroissant[taillecroissant],tabdesecroissant[tailledescroissant];
-
 	CopierTab(tab,testtabenOrdreCroissant,taille);
 	CopierTab(tab,testtabenOrdreDesCroissant,taille);
 	qsort(testtabenOrdreCroissant,taille,sizeof(int),CompareEnOrdreCroissant);
-	qsort(testtabenOrdreDesCroissant,taille,sizeof(int),CompareEnOrdreDesCroissant);	
-	
+	qsort(testtabenOrdreDesCroissant,taille,sizeof(int),CompareEnOrdreDesCroissant);
 	melangertout(tab,taille);
 	CopierTab(tab,copier,taille);// j'use cette proposition parce que cette fonction n'a pas besoin de la memoire
 	Resfusioncroissant = EstimationMergeSortEncroissant(copier,taille);
@@ -447,7 +309,6 @@ void comparaison(int* tab,int taille){
 	tabdesecroissant[0] = Resfusiondescroissant;
 	sum = (Resfusioncroissant + Resfusiondescroissant) / 2;
 	tabsum[0] = sum;//le tableau pour stocker les informations de moyen
-	
 	printf("\nresultat de temps pris en moyen \n\n-> %f \n", sum);
 	sum = 0;
 	CopierTab(tab,copier,taille);
@@ -456,7 +317,6 @@ void comparaison(int* tab,int taille){
 	ResTriRapideEnCroissant = EstimationTriRapideEncroissant(copier,taille);
 	estbientrie(copier,testtabenOrdreCroissant,taille);
 	estOrdreCroissant(copier,taille);
-	
 	printf("\n\n");
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
@@ -467,46 +327,34 @@ void comparaison(int* tab,int taille){
 	tabcroissant[1] = ResTriRapideEnCroissant;
 	tabdesecroissant[1] = ResTriRapiDesCroissant;
 	printf("\nresultat de temps pris en moyen \n\n-> %f \n", sum);
-	
 	tabsum[1] = sum;
 	sum = 0;
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
-	
 	ResQuickortProbabilisteEncroissant = EstimationEncroissantQuicksort(copier,taille);
 	estbientrie(copier,testtabenOrdreCroissant,taille);
 	estOrdreCroissant(copier,taille);
-
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
-	
-		
 	ResQuickortProbabilisteEnDesCroissant = EstimationDesCroissantQuicksort(copier,taille); 
 	estbientrie(copier,testtabenOrdreDesCroissant,taille);
 	estOrdreDesCroissant(copier,taille);
-	
 	sum = ResQuickortProbabilisteEncroissant + ResQuickortProbabilisteEnDesCroissant / 2; 
 	printf("\nresultat de temps pris en moyen \n\n-> %f \n", sum);
-
 	tabsum[2] = sum;
 	tabcroissant[2] = ResQuickortProbabilisteEncroissant;
 	tabdesecroissant[2] = ResQuickortProbabilisteEnDesCroissant;
 	sum = 0;
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
-
 	ResBubleSortEnCroissant = EstimationEnCroissantBubleSort(copier,taille);
 	estbientrie(copier,testtabenOrdreCroissant, taille);
 	estOrdreCroissant(copier,taille);
-
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
-	
 	ResBubleSortDesCroissant = EstimationDesCroissantBubleSort(copier,taille);
-
 	estbientrie(copier,testtabenOrdreDesCroissant, taille);
 	estOrdreDesCroissant(copier,taille);
-
 	CopierTab(tab,copier,taille);
 	sum = ResBubleSortEnCroissant +  ResBubleSortDesCroissant/ 2; 
 	tabsum[3] = sum;
@@ -514,7 +362,6 @@ void comparaison(int* tab,int taille){
 	sum = 0;	
 	tabcroissant[3] = ResBubleSortEnCroissant;
 	tabdesecroissant[3] = ResBubleSortDesCroissant;
-	
 	printf("\n--------------------------------------------------\n\n\n");
 
 		
