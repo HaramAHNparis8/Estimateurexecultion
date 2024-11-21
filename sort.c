@@ -5,85 +5,63 @@
 //la fusion
 
 
-void merge(int* tab, int bas, int milieu, int haut) {
-    
-    int taille = haut - bas + 1;
-    int b[taille];
-    int i = bas, j = milieu + 1, k = 0;
+void merge(int* tab, int* tmp, int bas, int milieu, int haut, int ordre) {
+    int i = bas, j = milieu + 1, k = bas;
 
-    
     while (i <= milieu && j <= haut) {
-        if (tab[i] <= tab[j]) {
-            b[k++] = tab[i++];
-        } 
-	else {
-            b[k++] = tab[j++];
-        }
-    }
-    while (i <= milieu) {
-        b[k++] = tab[i++];
-    }
-    while (j <= haut) {
-        b[k++] = tab[j++];
-    }
-
-    
-    for (i = 0; i < taille; i++) {
-        tab[bas + i] = b[i];
-    }
-}
-
-void mergeSortEncroissant(int* a, int low, int hight) {
-    
-    int mid;
-
-    if (low < hight) {
-        mid = (low + hight) / 2;
-        mergeSortEncroissant(a, low, mid);
-        mergeSortEncroissant(a, mid + 1, hight);
-        merge(a, low, mid, hight);
-    }
-}
-
-void MergeEnDecroissant(int* tab, int bas, int milieu, int haut) {
-    int taille = haut - bas + 1;
-    int* b = (int*)malloc(taille * sizeof(int)); 
-    int i = bas, j = milieu + 1, k = 0;
-
-  
-    while (i <= milieu && j <= haut) {
-        if (tab[i] >= tab[j]) {
-            b[k++] = tab[i++];
+        if ((ordre > 0 && tab[i] <= tab[j]) || (ordre < 0 && tab[i] >= tab[j])) {
+            tmp[k++] = tab[i++];
         } else {
-            b[k++] = tab[j++];
+            tmp[k++] = tab[j++];
         }
     }
 
-    
     while (i <= milieu) {
-        b[k++] = tab[i++];
+        tmp[k++] = tab[i++];
     }
     while (j <= haut) {
-        b[k++] = tab[j++];
+        tmp[k++] = tab[j++];
     }
 
-    
-    for (i = 0; i < taille; i++) {
-        tab[bas + i] = b[i];
+    for (i = bas; i <= haut; i++) {
+        tab[i] = tmp[i];
     }
-
 }
 
-void mergeSortdescroissant(int* a, int low, int hight) {
-    
-    int mid;
-
-    if (low < hight) {
-        mid = (low + hight) / 2;
-        mergeSortdescroissant(a, low, mid);
-        mergeSortdescroissant(a, mid + 1, hight);
-        MergeEnDecroissant(a, low, mid, hight);
+void mergeSortEncroissant(int* tab, int bas, int haut, int* tmp) {
+	int mid;
+    if (bas < haut) {
+        mid = (bas + haut) / 2;
+        mergeSortEncroissant(tab, bas, mid, tmp);
+        mergeSortEncroissant(tab, mid + 1, haut, tmp);
+        merge(tab, bas, mid, haut, tmp, 1);
     }
+}
+
+
+void mergeSortdescroissant(int* tab, int bas, int haut, int* tmp) {
+    int mid;
+    if (bas < haut) {
+        mid = (bas + haut) / 2;
+        mergeSortdescroissant(tab, bas, mid, tmp);
+        mergeSortdescroissant(tab, mid + 1, haut, tmp);
+        merge(tab, tmp, bas, mid, haut, -1);
+    }
+}
+
+void LafusionExecutionEncroissant(int*tab, int taille){
+
+	int* tmp = generationdetab(taille);
+	mergeSortEncroissant(tab, 0, taille - 1, tmp);
+	free(tmp);
+}
+
+void LafusionExecutionDesCroissant(int*tab, int taille){
+
+	int* tmp = generationdetab(taille);
+	mergeSortdescroissant(tab, 0, taille - 1, tmp);
+	free(tmp);
+
 }
 
 // trier rapide

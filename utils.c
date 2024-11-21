@@ -37,8 +37,6 @@ int returntaille(){ //la fonction pour entrer la taille
 
 int* generationdetab(int taille){ 
 
-
-	int i;
 	int* tab = (int*)malloc(taille * sizeof(int));		
 
 	return tab;

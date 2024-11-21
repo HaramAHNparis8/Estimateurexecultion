@@ -4,10 +4,11 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <time.h>
-void merge(int* tab, int bas, int milieu, int haut);
-void mergeSortEncroissant(int* a, int low, int hight);
-void MergeEnDecroissant(int* tab, int bas, int milieu, int haut);
-void mergeSortdescroissant(int* a, int low, int hight);
+void merge(int* tab,int* tmp,int bas, int milieu, int haut, int ordre);
+void mergeSortEncroissant(int* tab, int bas, int haut, int* tmp);
+void mergeSortdescroissant(int* tab, int bas, int haut, int* tmp);
+void LafusionExecutionEncroissant(int*tab, int taille);
+void LafusionExecutionDesCroissant(int*tab, int taille);
 void echanger(int *a, int *b);
 void TriRapideEnCroissant(int *tab, int bas, int haut);
 void TriRapideDesCroissant(int *tab, int bas, int haut);
