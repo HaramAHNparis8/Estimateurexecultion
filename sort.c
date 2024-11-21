@@ -29,6 +29,7 @@ void merge(int* tab, int* tmp, int bas, int milieu, int haut, int ordre) {
 }
 
 void mergeSortEncroissant(int* tab, int bas, int haut, int* tmp) {
+	
 	int mid;
     if (bas < haut) {
         mid = (bas + haut) / 2;
@@ -40,6 +41,7 @@ void mergeSortEncroissant(int* tab, int bas, int haut, int* tmp) {
 
 
 void mergeSortdescroissant(int* tab, int bas, int haut, int* tmp) {
+    
     int mid;
     if (bas < haut) {
         mid = (bas + haut) / 2;
@@ -142,20 +144,21 @@ void melangertout(int* tab, int taille){
 	}
 }
 
-void QuickortProbabilisteSortEnordreCroissant(int* tab, int taille){
-	
+void TrierTriRapideProbabiliste(int* tab, int taille){
+
+	int i = 0,j ,IndiceMinimal = i;
 	melangertout(tab, taille);
 	
-	int i = 0,j ,IndiceMinimal = i;
-	
-	while(i < taille - 1){
-
-		IndiceMinimal = i;
-		j = i + 1;
+	if(ordre > 0){
+		
+		while(i < taille - 1){
+			
+			IndiceMinimal = i;
+			j = i + 1;
 
 		while(j < taille){
-		
-		    if(tab[j] < tab[IndiceMinimal]){
+
+			if(tab[j] < tab[IndiceMinimal]){
 
 				IndiceMinimal = j;
 
@@ -163,12 +166,17 @@ void QuickortProbabilisteSortEnordreCroissant(int* tab, int taille){
 			j++;
 
 		}	
-	
-	echanger(&tab[i],&tab[IndiceMinimal]);
-	i++;
+
+		echanger(&tab[i],&tab[IndiceMinimal]);
+		i++;
 
 	}
 
+
+}
+
+void QuickortProbabilisteExecutionEnOrdreCroissant(int* tab, int taille){
+	TrierTriRapideProbabiliste
 }
 
 void QuickortProbabilisteSortEnordreDesCroissant(int* tab, int taille){
