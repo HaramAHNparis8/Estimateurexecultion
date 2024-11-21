@@ -8,6 +8,7 @@
 
 int returntaille();
 int* generationdetab(int taille);
+int* ReturnTableauRempli(int taille);
 void affichagederes(int* tab, int taille);
 void RemplirLesTab(int* tab, int taille);
 void remplirRecTab(int taille, int* tab);

@@ -72,7 +72,6 @@ void MergeEnDecroissant(int* tab, int bas, int milieu, int haut) {
         tab[bas + i] = b[i];
     }
 
-    free(b);  
 }
 
 void mergeSortdescroissant(int* a, int low, int hight) {
@@ -251,6 +250,5 @@ void buble_sort_descroissant(int* tab, int taille){
 		taille--;
 	}
 }
-
 
 

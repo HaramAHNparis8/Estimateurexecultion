@@ -25,7 +25,6 @@ int returntaille(){ //la fonction pour entrer la taille
 	printf("\n\n->  ");
 	scanf("%d", &taille);
 
-	
 	return taille;
 }
 
@@ -34,18 +33,13 @@ int returntaille(){ //la fonction pour entrer la taille
 
 //la premier proposition
 
+
+
 int* generationdetab(int taille){ 
 
 
 	int i;
-	int* tab = (int*)malloc(taille * sizeof(int));	
-	//int* tab = malloc(taille * sizeof(int)); 
-	
-	for(i = 0; i < taille; i++){
-
-		tab[i] = rand() % 10000;
-
-	}
+	int* tab = (int*)malloc(taille * sizeof(int));		
 
 	return tab;
 }
@@ -65,6 +59,8 @@ void RemplirLesTab(int* tab, int taille){
 
 
 }
+
+
 // troisieme proposition
 void remplirRecTab(int taille, int* tab){
 
@@ -75,7 +71,15 @@ void remplirRecTab(int taille, int* tab){
 	
 	remplirRecTab(taille - 1,tab);
 }
+//
 
+int* ReturnTableauRempli(int taille){
+
+	int* tab = generationdetab(taille);
+	RemplirLesTab(tab, taille);
+	
+	return tab;
+}
 
 //les fonctions pour initialiser les tableaux copier les tableau original
 
@@ -135,16 +139,16 @@ void affichagederes(int* tab,int taille){
 
 //les fonctions pour estimer des temps pris 
 
-double EstimationGeneral(int* tab, int taille, void (*f)(int*, int, int), const char** algoNames, int algoIndex) {
+double EstimationGeneral(int* tab, int taille, void (*f)(int*, int, int), const char** TabNomAlgo, int Indice) {
    
-    printf("\n\n--------------%s-------------\n\n", algoNames[algoIndex]);
+    printf("\n\n--------------%s-------------\n\n", TabNomAlgo[Indice]);
     affichagederes(tab, taille); 
     clock_t debut = clock(); 
-    f(tab, 0, taille - 1);   
+    f(tab, taille - 1);   
     clock_t fin = clock(); 
     double tempspris = (double)(fin - debut) / CLOCKS_PER_SEC;
     affichagederes(tab, taille); 
-    printf("\nTemps pris pour l'algorithme  %s : %f seconds\n", algoNames[algoIndex], tempspris);
+    printf("\nTemps pris pour l'algorithme  %s : %f seconds\n", TabNomAlgo[Indice], tempspris);
 
     return tempspris;
 
@@ -218,6 +222,7 @@ void estbientrie(int* tab1, int* tab2, int taille){
 //la fonction pour verifier le tab est bien trie en ordre croissant
 
 void estOrdreCroissant(int* tab, int taille){
+	
 	int i = 0;
 
 	printf("\n--------------------------------------------------\n");
@@ -225,13 +230,13 @@ void estOrdreCroissant(int* tab, int taille){
 	while(i < taille - 1){
 
 		if(tab[i] < tab[i + 1]){
-			printf("\nle resultat %deme et %d eme[%d  %d]\n",i, i + 1, tab[i], tab[i + 1]);
+			printf("\nle resultat %deme %d eme[%d  %d]\n",i, i + 1, tab[i], tab[i + 1]);
 			printf("\n -> correct\n");
 
 
 		}
 		else{
-			printf("\nle resultat %deme et %d eme[%d %d]\n",i, i + 1, tab[i], tab[i + 1]);
+			printf("\nle resultat %deme %d eme[%d %d]\n",i, i + 1, tab[i], tab[i + 1]);
 			printf("\n -> non correct\n");
 		}
 		i++;
@@ -251,13 +256,13 @@ void estOrdreDesCroissant(int* tab, int taille){
 
 		if(tab[i] > tab[i + 1]){
 
-			printf("\nle resultat %deme %d eme[%d  %d]\n",i, i + 1, tab[i], tab[i + 1]);
+			printf("\nle resultat %deme %deme[%d  %d]\n",i, i + 1, tab[i], tab[i + 1]);
 			printf("\n -> correct\n");
 
 
 		}
 		else{
-			printf("\nle resultat %deme %d eme[%d et %d]\n",i, i + 1, tab[i], tab[i + 1]);
+			printf("\nle resultat %deme %deme[%d et %d]\n",i, i + 1, tab[i], tab[i + 1]);
 			printf("\n -> non correct\n");
 
 		}
