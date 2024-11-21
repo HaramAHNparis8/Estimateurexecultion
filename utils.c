@@ -142,7 +142,7 @@ double EstimationGeneral(int* tab, int taille, void (*f)(int*, int, int), const 
     printf("\n\n--------------%s-------------\n\n", TabNomAlgo[Indice]);
     affichagederes(tab, taille); 
     clock_t debut = clock(); 
-    f(tab, taille - 1);   
+    f(tab, taille);   
     clock_t fin = clock(); 
     double tempspris = (double)(fin - debut) / CLOCKS_PER_SEC;
     affichagederes(tab, taille); 
