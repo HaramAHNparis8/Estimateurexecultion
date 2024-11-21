@@ -72,53 +72,63 @@ void echanger(int *a, int *b) {
     *b = tmp;
 }
 
-void TriRapideEnCroissant(int *tab, int bas, int haut) {
-    if (bas > haut){ 
-		return;
-	}
+void partition(int* tab, int* bas, int* haut, int pivot, int ordre) {
+    int i = *bas, j = *haut;
 
-    int pivot = tab[(bas + haut) / 2];
-    int i = bas, j = haut;
     while (i <= j) {
-        while (tab[i] < pivot){ 
-		i++;
-			}
-        while (tab[j] > pivot) {
-		j--;
-			}
+        if (ordre > 0) { 
+            while (tab[i] < pivot){ 
+			i++;
+	 }
+            while (tab[j] > pivot) {
+			j--;
+	}
+        } 
+	else { 
+            while (tab[i] > pivot){
+			
+			i++;
+		}
+            while (tab[j] < pivot){
+			
+			j--;
+		}
+        }
+
         if (i <= j) {
             echanger(&tab[i], &tab[j]);
             i++;
             j--;
         }
     }
-    TriRapideEnCroissant(tab, bas, j);
-    TriRapideEnCroissant(tab, i, haut);
+
+    *bas = i;
+    *haut = j;
 }
 
-
-void TriRapideDesCroissant(int *tab, int bas, int haut) {
-    if (bas >= haut) { 
+void TriRapide(int* tab, int bas, int haut, int ordre) {
+    if (bas >= haut) {
         return;
     }
 
-    int pivot = tab[(bas + haut) / 2];
-    int i = bas, j = haut;
-    while (i <= j) {
-        while (tab[i] > pivot) { 
-            i++;
-        }
-        while (tab[j] < pivot) {
-            j--;
-        }
-        if (i <= j) {
-            echanger(&tab[i], &tab[j]);
-            i++;
-            j--;
-        }
-    }
-    TriRapideDesCroissant(tab, bas, j);
-    TriRapideDesCroissant(tab, i, haut);
+    int pivot = tab[(bas + haut) / 2], i = bas, j = haut;
+
+    partition(tab, &i, &j, pivot, ordre);
+
+    TriRapide(tab, bas, j, ordre);
+    TriRapide(tab, i, haut, ordre);
+}
+
+void LaTriRapidExecutionEnCroissant(int* tab, int taille){
+	
+	TriRapide(tab, 0, taille - 1, 1);
+
+}
+
+void LaTriRapidExecutionEnDesCroissant(int* tab, int taille){
+	
+	TriRapide(tab, 0, taille - 1, -1);
+
 }
 
 void melangertout(int* tab, int taille){
