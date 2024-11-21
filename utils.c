@@ -103,7 +103,7 @@ void CopierTab(int* oringinal,int* copier ,int taille){
 	int i;	
 
 	printf("\n--------------------------------------------------\n");
-	printf("\n\n---------> l'ordre de lst est initialise <--------\n\n");
+	printf("\n\n-> l'ordre de lst est initialise <--------\n\n");
 	printf("\n--------------------------------------------------\n");
 
 	for(i = 0; i < taille; i++){
@@ -260,7 +260,7 @@ void estOrdreDesCroissant(int* tab, int taille){
 
 		}
 		else{
-			printf("\nle resultat %deme %deme[%d et %d]\n",i, i + 1, tab[i], tab[i + 1]);
+			printf("\nle resultat %deme %deme[%d %d]\n",i, i + 1, tab[i], tab[i + 1]);
 			printf("\n -> non correct\n");
 
 		}
