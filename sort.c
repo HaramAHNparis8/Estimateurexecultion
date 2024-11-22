@@ -6,6 +6,7 @@
 
 
 void merge(int* tab, int* tmp, int bas, int milieu, int haut, int ordre) {
+
     int i = bas, j = milieu + 1, k = bas;
 
     while (i <= milieu && j <= haut) {

@@ -84,7 +84,7 @@ int* ReturnTableauRempli(int taille){
 int* CopierLeTab(int* tab, int taille){
 	
 	int i;
-	int* copier = (int *)malloc(taille * sizeof(int));
+	int* copier = generationdetab(taille);
 
 	for(i = 0; i < taille; i++){
 
@@ -137,7 +137,7 @@ void affichagederes(int* tab,int taille){
 
 //les fonctions pour estimer des temps pris 
 
-double EstimationGeneral(int* tab, int taille, void (*f)(int*, int, int), const char** TabNomAlgo, int Indice) {
+double EstimationGeneral(int* tab, int taille, void (*f)(int*, int), const char** TabNomAlgo, int Indice) {
    
     printf("\n\n--------------%s-------------\n\n", TabNomAlgo[Indice]);
     affichagederes(tab, taille); 
@@ -155,6 +155,7 @@ double EstimationGeneral(int* tab, int taille, void (*f)(int*, int, int), const 
 
 
 double min(double* tab,int taille){
+	
 	int i;
 	double min = tab[0];
 	
@@ -296,7 +297,8 @@ void comparaison(int* tab,int taille){
 	qsort(testtabenOrdreDesCroissant,taille,sizeof(int),CompareEnOrdreDesCroissant);
 	melangertout(tab,taille);
 	CopierTab(tab,copier,taille);// j'use cette proposition parce que cette fonction n'a pas besoin de la memoire
-	Resfusioncroissant = EstimationMergeSortEncroissant(copier,taille);
+	Resfusioncroissant = EstimationGeneral
+(copier,taille);
 	estbientrie(copier,testtabenOrdreCroissant,taille);
 //la fonction pour intialiser la lst 
 	estOrdreCroissant(copier,taille);	
