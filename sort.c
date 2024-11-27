@@ -149,58 +149,43 @@ void melangertout(int* tab, int taille){
 
 // La fonction ou l'implementation reelle du tri est effectuee
 
-void TrierRapideTableau(int* tab, int taille,int ordre){
-	
-	int i = 0,j ,IndiceMinimal = i;
-	melangertout(tab, taille);
-	
-	if(ordre > 0){
-		
-		while(i < taille - 1){
-			
-			IndiceMinimal = i;
-			j = i + 1;
+void TrierRapideTableau(int* tab, int taille, int ordre) {
+    int i = 0, j, IndiceMinimal;
 
-		while(j < taille){
+    melangertout(tab, taille); 
 
-			if(tab[j] > tab[IndiceMinimal]){
+    if (ordre > 0) { 
+        while (i < taille - 1) {
+            IndiceMinimal = i;
+            j = i + 1;
 
-				IndiceMinimal = j;
+            while (j < taille) {
+                if (tab[j] > tab[IndiceMinimal]) { 
+                    IndiceMinimal = j;
+                }
+                j++;
+            }
 
-			}
-			j++;
+            echanger(&tab[i], &tab[IndiceMinimal]); 
+            i++;
+        }
+    } 
+	else { 
+        while (i < taille - 1) {
+            IndiceMinimal = i;
+            j = i + 1;
 
-		}	
+            while (j < taille) {
+                if (tab[j] < tab[IndiceMinimal]) {
+                    IndiceMinimal = j;
+                }
+                j++;
+            }
 
-		echanger(&tab[i],&tab[IndiceMinimal]);
-		i++;
-
-	}
-	else{
-		
-		while(i < taille - 1){
-				
-				IndiceMinimal = i;
-				j = i + 1;
-
-		while(j < taille){
-
-			if(tab[j] < tab[IndiceMinimal]){
-
-				IndiceMinimal = j;
-
-			}
-			j++;
-
-		}	
-
-		echanger(&tab[i],&tab[IndiceMinimal]);
-		i++;
-
-		
-	}
-
-
+            echanger(&tab[i], &tab[IndiceMinimal]); 
+            i++;
+        }
+    }
 }
 void TrierTriRapideProbabilisteExcutionEnOredreDescroissant(int* tab, int taille){
 	
@@ -230,6 +215,7 @@ void buble_sort(int* tab, int taille,int ordre){
 
 		}
 		taille--;
+		}
 	}
 	else{
 		
