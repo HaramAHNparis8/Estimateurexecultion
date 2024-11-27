@@ -1,18 +1,15 @@
 #include "utils.h"
 #include "sort.h"
 
-const char* TabNomAlgo[]{
-	
-	"la fusion Croissant";
-	"la fusion Descroissant";
-	"Quicksort Croissant";
-	"Quicksort Descroissant";
-	"QuickortProbabiliste Croissant";
-	"QuickortProbabiliste Descroissant";
-	"BubleSort Croissant";
-	"BubleSort Descroissant";
-
-
+const char* TabNomAlgo[] = {
+    "la fusion Croissant",
+    "la fusion Descroissant",
+    "Quicksort Croissant",
+    "Quicksort Descroissant",
+    "QuickortProbabiliste Croissant",
+    "QuickortProbabiliste Descroissant",
+    "BubleSort Croissant",
+    "BubleSort Descroissant"
 };
 
 //la fonction pour retourner la taille de tableau
@@ -103,7 +100,7 @@ void CopierTab(int* oringinal,int* copier ,int taille){
 	int i;	
 
 	printf("\n--------------------------------------------------\n");
-	printf("\n\n-> l'ordre de lst est initialise <--------\n\n");
+	printf("\n\n-> l'ordre de lst est initialise\n\n");
 	printf("\n--------------------------------------------------\n");
 
 	for(i = 0; i < taille; i++){
@@ -174,11 +171,11 @@ double min(double* tab,int taille){
 }
 
 //la fonction pour rechercher la postion
-
+//la premier propostion
 int Estdans(double* tab, int taille, double min){
 	if(min == tab[taille]){
 		
-		return taille;
+		return min;
 	}
 	else{
 		return Estdans(tab, taille - 1,min);
@@ -189,7 +186,17 @@ int EstdansTerminal(double* tab, int taille, double min){
 		
 		return Estdans(tab,taille - 1, min);
 }
+int EstaDansPlusRapide(double* tab, int taille, double min){
+ 	int i;
+	double min = tab[0];
+	for(i = 0; i < taille; taille++){
+		if(min == tab[taille]){
 
+			return min; 
+		}
+	}
+
+}
 //la fonction pour tester que les tableaux sont bien trie ou pas
 
 void estbientrie(int* tab1, int* tab2, int taille){
@@ -290,7 +297,6 @@ void comparaison(int* tab,int taille){
 	int* copier = generationdetab(taille);	
 	int* testtabenOrdreCroissant = generationdetab(taille);// le tableau pour tester bien trier ou pas
 	int* testtabenOrdreDesCroissant = generationdetab(taille);// le tableau pour tester bien trier ou pas
-
 	double tabsum[taillesum],sum, Resfusioncroissant, Resfusiondescroissant,ResTriRapideEnCroissant,ResTriRapiDesCroissant,ResQuickortProbabilisteEncroissant,ResQuickortProbabilisteEnDesCroissant,ResBubleSortEnCroissant,ResBubleSortDesCroissant,tabcroissant[taillecroissant],tabdesecroissant[tailledescroissant];
 	CopierTab(tab,testtabenOrdreCroissant,taille);
 	CopierTab(tab,testtabenOrdreDesCroissant,taille);
@@ -298,7 +304,7 @@ void comparaison(int* tab,int taille){
 	qsort(testtabenOrdreDesCroissant,taille,sizeof(int),CompareEnOrdreDesCroissant);
 	melangertout(tab,taille);
 	CopierTab(tab,copier,taille);// j'use cette proposition parce que cette fonction n'a pas besoin de la memoire
-	Resfusioncroissant = EstimationGeneral(copier,taille,LafusionExecutionEncroissant(copier, taille),TabNomAlgo[0]);
+	Resfusioncroissant = EstimationGeneral(copier,taille,LafusionExecutionEncroissant,TabNomAlgo,0);
 	estbientrie(copier,testtabenOrdreCroissant,taille);
 //la fonction pour intialiser la lst 
 	estOrdreCroissant(copier,taille);	
@@ -307,7 +313,7 @@ void comparaison(int* tab,int taille){
 //la fonction pour initialiser les tableaux c'est la deuxieme propostion
 	//copier = CopierLeTab(tab,taille);
 	//affichagederes(copier,taille);
-	Resfusiondescroissant = EstimationGeneral(copier,taille,LafusionExecutionDesCroissant(copier, taille),TabNomAlgo[1]);
+	Resfusiondescroissant = EstimationGeneral(copier,taille,LafusionExecutionDesCroissant,TabNomAlgo,1);
 	estbientrie(copier,testtabenOrdreDesCroissant,taille);
 	estOrdreDesCroissant(copier,taille);
 	tabcroissant[0] = Resfusioncroissant;
@@ -319,14 +325,13 @@ void comparaison(int* tab,int taille){
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
 	printf("\n\n");
-	ResTriRapideEnCroissant = EstimationGeneral(copier,taille,LaTriRapidExecutionEnCroissant(copier, taille),TabNomAlgo[2]);
-
+	ResTriRapideEnCroissant = EstimationGeneral(copier,taille,LaTriRapidExecutionEnCroissant,TabNomAlgo,2);
 	estbientrie(copier,testtabenOrdreCroissant,taille);
 	estOrdreCroissant(copier,taille);
 	printf("\n\n");
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
-	ResTriRapiDesCroissant = EstimationGeneral(copier,taille,LaTriRapidExecutionEnDesCroissant(copier, taille),TabNomAlgo[3]);
+	ResTriRapiDesCroissant = EstimationGeneral(copier,taille,LaTriRapidExecutionEnDesCroissant,TabNomAlgo,3);
 	estbientrie(copier,testtabenOrdreDesCroissant,taille);
 	estOrdreDesCroissant(copier,taille);
 	sum = ResTriRapideEnCroissant + ResTriRapiDesCroissant / 2;
@@ -337,13 +342,12 @@ void comparaison(int* tab,int taille){
 	sum = 0;
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
-	ResQuickortProbabilisteEncroissant = EstimationGeneral(copier,taille,QuickortProbabilisteExecutionEnOrdreCroissant(copier,taille),TabNomAlgo[4]);
+	ResQuickortProbabilisteEncroissant = EstimationGeneral(copier,taille,QuickortProbabilisteExecutionEnOrdreCroissant,TabNomAlgo,4);
 	estbientrie(copier,testtabenOrdreCroissant,taille);
 	estOrdreCroissant(copier,taille);
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
-	ResQuickortProbabilisteEnDesCroissant = EstimationGeneral(copier,taille,TrierTriRapideProbabilisteExcutionEnOredreDescroissant(copier,taille),TabNomAlgo[5]);
-; 
+	ResQuickortProbabilisteEnDesCroissant = EstimationGeneral(copier,taille,TrierTriRapideProbabilisteExcutionEnOredreDescroissant,TabNomAlgo,5);
 	estbientrie(copier,testtabenOrdreDesCroissant,taille);
 	estOrdreDesCroissant(copier,taille);
 	sum = ResQuickortProbabilisteEncroissant + ResQuickortProbabilisteEnDesCroissant / 2; 
@@ -354,13 +358,12 @@ void comparaison(int* tab,int taille){
 	sum = 0;
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
-	ResBubleSortEnCroissant = EstimationGeneral(copier,taille,BubleSortExecutionEnOrdreCroissant(copier,taille),TabNomAlgo[6]);
-
+	ResBubleSortEnCroissant = EstimationGeneral(copier,taille,BubleSortExecutionEnOrdreCroissant,TabNomAlgo,6);
 	estbientrie(copier,testtabenOrdreCroissant, taille);
 	estOrdreCroissant(copier,taille);
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
-	ResBubleSortDesCroissant = EstimationGeneral(copier,taille,BubleSortExecutionEnOrdreDesCroissant(copier,taille),TabNomAlgo[7]);
+	ResBubleSortDesCroissant = EstimationGeneral(copier,taille,BubleSortExecutionEnOrdreDesCroissant,TabNomAlgo,7);
 	estbientrie(copier,testtabenOrdreDesCroissant, taille);
 	estOrdreDesCroissant(copier,taille);
 	CopierTab(tab,copier,taille);
