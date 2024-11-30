@@ -9,6 +9,7 @@ void TestLaFonction(){
 	taille = returntaille();
 
 	int* tab1 = generationdetab(taille);
+	RemplirLesTab(tab1,taille);	
 	//affichagederes(tab1,taille);
 	//RemplirLesTab(tab2,taille);
 	//affichagederes(tab2,taille);	

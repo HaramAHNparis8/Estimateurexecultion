@@ -193,7 +193,7 @@ void TrierTriRapideProbabilisteExcutionEnOredreDescroissant(int* tab, int taille
 
 }
 
-void QuickortProbabilisteExecutionEnOrdreCroissant(int* tab, int taille){
+void TrierTriRapideProbabilisteExcutionEnOredrecroissant(int* tab, int taille){
 	
 	TrierRapideTableau(tab,taille,1);
 

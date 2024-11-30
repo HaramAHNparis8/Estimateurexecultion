@@ -19,7 +19,7 @@ void LaTriRapidExecutionEnDesCroissant(int* tab, int taille);
 void melangertout(int* tab, int taille);
 void TrierRapideTableau(int* tab, int taille,int ordre);
 void TrierTriRapideProbabilisteExcutionEnOredreDescroissant(int* tab, int taille);
-void QuickortProbabilisteExecutionEnOrdreCroissant(int* tab, int taille);
+void TrierTriRapideProbabilisteExcutionEnOredrecroissant(int* tab, int taille);
 void buble_sort(int* tab, int taille,int ordre);
 void BubleSortExecutionEnOrdreCroissant(int* tab, int taille);
 void BubleSortExecutionEnOrdreDesCroissant(int* tab, int taille);
