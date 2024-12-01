@@ -295,19 +295,16 @@ int CompareEnOrdreDesCroissant(const void *a, const void *b) {
 
 void comparaison(int* tab,int taille){
 	
-	int* copier = generationdetab(taille);
+	int* copier = generationdetab(taille);	
 	int* testtabenOrdreCroissant = generationdetab(taille);// le tableau pour tester bien trier ou pas
 	int* testtabenOrdreDesCroissant = generationdetab(taille);// le tableau pour tester bien trier ou pas
-	RemplirLesTab(testtabenOrdreCroissant,taille);
 	double tabsum[taillesum],sum, Resfusioncroissant, Resfusiondescroissant,ResTriRapideEnCroissant,ResTriRapiDesCroissant,ResQuickortProbabilisteEncroissant,ResQuickortProbabilisteEnDesCroissant,ResBubleSortEnCroissant,ResBubleSortDesCroissant,tabcroissant[taillecroissant],tabdesecroissant[tailledescroissant];
 	CopierTab(tab,testtabenOrdreCroissant,taille);
 	CopierTab(tab,testtabenOrdreDesCroissant,taille);
-	
 	qsort(testtabenOrdreCroissant,taille,sizeof(int),CompareEnOrdreCroissant);
 	qsort(testtabenOrdreDesCroissant,taille,sizeof(int),CompareEnOrdreDesCroissant);
 	melangertout(tab,taille);
 	CopierTab(tab,copier,taille);// j'use cette proposition parce que cette fonction n'a pas besoin de la memoire
-	printf("\n\ncoucou1\n\n");
 	Resfusioncroissant = EstimationGeneral(copier,taille,LafusionExecutionEncroissant,TabNomAlgo,0);
 	estbientrie(copier,testtabenOrdreCroissant,taille);
 //la fonction pour intialiser la lst 
@@ -329,14 +326,13 @@ void comparaison(int* tab,int taille){
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
 	printf("\n\n");
-	printf("\n\ncoucou3\n\n");
-
 	ResTriRapideEnCroissant = EstimationGeneral(copier,taille,LaTriRapidExecutionEnCroissant,TabNomAlgo,2);
 	estbientrie(copier,testtabenOrdreCroissant,taille);
 	estOrdreCroissant(copier,taille);
+	printf("\n\n");
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
-	ResTriRapiDesCroissant = EstimationGeneral(copier,taille,TrierTriRapideProbabilisteExcutionEnOrcroissant,TabNomAlgo,3);
+	ResTriRapiDesCroissant = EstimationGeneral(copier,taille,LaTriRapidExecutionEnDesCroissant,TabNomAlgo,3);
 	estbientrie(copier,testtabenOrdreDesCroissant,taille);
 	estOrdreDesCroissant(copier,taille);
 	sum = ResTriRapideEnCroissant + ResTriRapiDesCroissant / 2;
@@ -346,15 +342,13 @@ void comparaison(int* tab,int taille){
 	tabsum[1] = sum;
 	sum = 0;
 	CopierTab(tab,copier,taille);
-	affichagederes(copier,taille); 	
-	ResQuickortProbabilisteEncroissant = EstimationGeneral(copier,taille, LaTriRapidExecutionEnDesCroissant,TabNomAlgo,4);
+	affichagederes(copier,taille);
+	ResQuickortProbabilisteEncroissant = EstimationGeneral(copier,taille,QuickortProbabilisteExecutionEnOrdreCroissant,TabNomAlgo,4);
 	estbientrie(copier,testtabenOrdreCroissant,taille);
 	estOrdreCroissant(copier,taille);
 	CopierTab(tab,copier,taille);
 	affichagederes(copier,taille);
-
-
-	ResQuickortProbabilisteEnDesCroissant = EstimationGeneral(copier,taille,TrierTriRapideProbabilisteExcutionEnOredrecroissant,TabNomAlgo,5);
+	ResQuickortProbabilisteEnDesCroissant = EstimationGeneral(copier,taille,TrierTriRapideProbabilisteExcutionEnOredreDescroissant,TabNomAlgo,5);
 	estbientrie(copier,testtabenOrdreDesCroissant,taille);
 	estOrdreDesCroissant(copier,taille);
 	sum = ResQuickortProbabilisteEncroissant + ResQuickortProbabilisteEnDesCroissant / 2; 

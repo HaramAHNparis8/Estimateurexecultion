@@ -187,15 +187,16 @@ void TrierRapideTableau(int* tab, int taille, int ordre) {
         }
     }
 }
-void TrierTriRapideProbabilisteExcutionEnOredreDescroissant(int* tab, int taille){
+
+void TriRapideProbabilisteExcutionEnOredreDescroissant(int* tab, int taille){
 	
 	TrierRapideTableau(tab,taille,-1);
 
 }
 
-void TrierTriRapideProbabilisteExcutionEnOredrecroissant(int* tab, int taille){
+void TriRapideProbabilisteExcutionEnOredrecroissant(int* tab, int taille){
 	
-	TrierRapideTableau(tab,taille,1);
+	TrierRapideTableau(tab,taille,0);
 
 }
 
