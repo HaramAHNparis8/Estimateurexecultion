@@ -21,6 +21,7 @@ int EstdansTerminal(double* tab, int taille, double min);
 void estOrdreCroissant(int* tab, int taille);
 void estOrdreDesCroissant(int* tab, int taille);
 void comparaison(int* tab,int taille);
+double EstimationGeneral(int* tab, int taille, void (*f)(int*, int), const char** TabNomAlgo, int Indice);
 int CompareEnOrdreCroissant(const void *a, const void *b);
 int CompareEnOrdreDesCroissant(const void *a, const void *b);
 void estbientrie(int* tab1, int* tab2, int taille);
